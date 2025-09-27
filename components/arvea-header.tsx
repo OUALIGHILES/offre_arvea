@@ -3,11 +3,14 @@
 import React from "react"
 import { ArveaLogo } from "@/components/arvea-logo"
 import { Button } from "@/components/ui/button"
+import { LanguageSelector } from "@/components/language-selector"
+import { useTranslation } from "@/lib/translation-context"
 import { Menu, X } from "lucide-react"
 import { useState } from "react"
 
 export function ArveaHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { t } = useTranslation()
 
   const scrollToSection = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" })
@@ -29,37 +32,38 @@ export function ArveaHeader() {
               onClick={() => scrollToSection("hero")}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
-              Accueil
+              {t.home}
             </button>
             <button
               onClick={() => scrollToSection("earning-methods")}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
-              Méthodes
+              {t.methods}
             </button>
             <button
               onClick={() => scrollToSection("success-strategies")}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
-              Stratégies
+              {t.strategies}
             </button>
             <button
               onClick={() => scrollToSection("lead-form")}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
-              Contact
+              {t.contact}
             </button>
           </nav>
 
-          {/* CTA Button */}
+          {/* CTA Button & Language Selector */}
           <div className="hidden md:flex items-center space-x-4">
+            <LanguageSelector />
             <Button
               variant="arvea"
               size="lg"
               onClick={() => scrollToSection("lead-form")}
               className="font-bold btn-pulse-soft btn-wave"
             >
-              Commencer
+              {t.start}
             </Button>
           </div>
 
@@ -88,34 +92,37 @@ export function ArveaHeader() {
                 onClick={() => scrollToSection("hero")}
                 className="block w-full text-left px-3 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-colors"
               >
-                Accueil
+                {t.home}
               </button>
               <button
                 onClick={() => scrollToSection("earning-methods")}
                 className="block w-full text-left px-3 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-colors"
               >
-                Méthodes
+                {t.methods}
               </button>
               <button
                 onClick={() => scrollToSection("success-strategies")}
                 className="block w-full text-left px-3 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-colors"
               >
-                Stratégies
+                {t.strategies}
               </button>
               <button
                 onClick={() => scrollToSection("lead-form")}
                 className="block w-full text-left px-3 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-colors"
               >
-                Contact
+                {t.contact}
               </button>
-              <div className="pt-2">
+              <div className="pt-2 space-y-2">
+                <div className="px-3">
+                  <LanguageSelector />
+                </div>
                 <Button
                   variant="arvea"
                   size="lg"
                   onClick={() => scrollToSection("lead-form")}
                   className="w-full font-bold btn-pulse-soft btn-wave"
                 >
-                  Commencer
+                  {t.start}
                 </Button>
               </div>
             </div>

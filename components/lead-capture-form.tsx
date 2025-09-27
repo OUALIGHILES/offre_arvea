@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { useToast } from "@/hooks/use-toast"
+import { useTranslation } from "@/lib/translation-context"
 
 interface FormData {
   firstName: string
@@ -34,25 +35,26 @@ export function LeadCaptureForm() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { toast } = useToast()
+  const { t, language } = useTranslation()
 
   const handleInputChange = (field: keyof FormData, value: string | boolean) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
   const openWhatsApp = (formData: FormData) => {
+    const workedOnlineText = formData.workedOnline === "yes" ? 
+      (language === 'ar' ? 'نعم' : language === 'en' ? 'Yes' : 'Oui') : 
+      (language === 'ar' ? 'لا' : language === 'en' ? 'No' : 'Non')
+    
     const message = encodeURIComponent(
-      `🟢 NOUVEAU LEAD ARVEA 🟢
-
-👤 Nom: ${formData.firstName} ${formData.lastName}
-📍 Localisation: ${formData.location}
-📞 Téléphone: ${formData.phone}
-💻 Expérience en ligne: ${formData.workedOnline === "yes" ? "Oui" : "Non"}
-📝 Notes: ${formData.notes || "Aucune note"}
-
-✅ Formulaire soumis avec succès sur le site Arvea
-🕐 Date: ${new Date().toLocaleString('fr-FR')}
-
-Merci de contacter ce prospect rapidement !`
+      t.whatsappMessage
+        .replace('{firstName}', formData.firstName)
+        .replace('{lastName}', formData.lastName)
+        .replace('{location}', formData.location)
+        .replace('{phone}', formData.phone)
+        .replace('{workedOnline}', workedOnlineText)
+        .replace('{notes}', formData.notes || (language === 'ar' ? 'لا توجد ملاحظات' : language === 'en' ? 'No notes' : 'Aucune note'))
+        .replace('{date}', new Date().toLocaleString(language === 'ar' ? 'ar-DZ' : language === 'en' ? 'en-US' : 'fr-FR'))
     )
     const whatsappUrl = `https://wa.me/213660839370?text=${message}`
     window.open(whatsappUrl, "_blank")
@@ -63,8 +65,8 @@ Merci de contacter ce prospect rapidement !`
 
     if (!formData.privacyConsent) {
       toast({
-        title: "Privacy Consent Required",
-        description: "Please accept the privacy policy to continue.",
+        title: t.privacyRequired,
+        description: t.privacyDescription,
         variant: "destructive",
       })
       return
@@ -95,8 +97,8 @@ Merci de contacter ce prospect rapidement !`
       }
 
       toast({
-        title: "Success!",
-        description: "Your information has been submitted successfully. Opening WhatsApp...",
+        title: t.success,
+        description: t.successDescription,
       })
 
       // Reset form
@@ -117,7 +119,7 @@ Merci de contacter ce prospect rapidement !`
     } catch (error) {
       console.error("Form submission error:", error)
       toast({
-        title: "Error",
+        title: t.error,
         description: error instanceof Error ? error.message : "Failed to submit form. Please try again.",
         variant: "destructive",
       })
@@ -131,64 +133,64 @@ Merci de contacter ce prospect rapidement !`
       <div className="max-w-2xl mx-auto">
         <Card>
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl sm:text-3xl text-balance">Ready to Start Your Online Journey?</CardTitle>
+            <CardTitle className="text-2xl sm:text-3xl text-balance">{t.formTitle}</CardTitle>
             <CardDescription className="text-lg text-pretty">
-              Fill out the form below and we'll connect you with the best opportunities for your situation.
+              {t.formSubtitle}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="firstName">First Name *</Label>
+                  <Label htmlFor="firstName">{t.firstName} *</Label>
                   <Input
                     id="firstName"
                     type="text"
                     required
                     value={formData.firstName}
                     onChange={(e) => handleInputChange("firstName", e.target.value)}
-                    placeholder="Enter your first name"
+                    placeholder={t.firstName}
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="lastName">Last Name *</Label>
+                  <Label htmlFor="lastName">{t.lastName} *</Label>
                   <Input
                     id="lastName"
                     type="text"
                     required
                     value={formData.lastName}
                     onChange={(e) => handleInputChange("lastName", e.target.value)}
-                    placeholder="Enter your last name"
+                    placeholder={t.lastName}
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="location">Location *</Label>
+                <Label htmlFor="location">{t.location} *</Label>
                 <Input
                   id="location"
                   type="text"
                   required
                   value={formData.location}
                   onChange={(e) => handleInputChange("location", e.target.value)}
-                  placeholder="City, Country"
+                  placeholder={t.location}
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="phone">Phone Number *</Label>
+                <Label htmlFor="phone">{t.phoneNumber} *</Label>
                 <Input
                   id="phone"
                   type="tel"
                   required
                   value={formData.phone}
                   onChange={(e) => handleInputChange("phone", e.target.value)}
-                  placeholder="+1234567890"
+                  placeholder={t.phoneNumber}
                 />
               </div>
 
               <div className="space-y-3">
-                <Label>Have you worked online before? *</Label>
+                <Label>{t.workedOnline} *</Label>
                 <RadioGroup
                   value={formData.workedOnline}
                   onValueChange={(value) => handleInputChange("workedOnline", value)}
@@ -196,22 +198,22 @@ Merci de contacter ce prospect rapidement !`
                 >
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="yes" id="worked-yes" />
-                    <Label htmlFor="worked-yes">Yes, I have experience working online</Label>
+                    <Label htmlFor="worked-yes">{t.workedOnlineYes}</Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="no" id="worked-no" />
-                    <Label htmlFor="worked-no">No, I'm new to online work</Label>
+                    <Label htmlFor="worked-no">{t.workedOnlineNo}</Label>
                   </div>
                 </RadioGroup>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="notes">Additional Notes</Label>
+                <Label htmlFor="notes">{t.additionalNotes}</Label>
                 <Textarea
                   id="notes"
                   value={formData.notes}
                   onChange={(e) => handleInputChange("notes", e.target.value)}
-                  placeholder="Tell us about your goals, skills, or any questions you have..."
+                  placeholder={t.additionalNotes}
                   rows={4}
                 />
               </div>
@@ -224,8 +226,7 @@ Merci de contacter ce prospect rapidement !`
                   required
                 />
                 <Label htmlFor="privacy" className="text-sm text-pretty leading-relaxed">
-                  I consent to the collection and processing of my personal data for the purpose of receiving
-                  information about Arvea job opportunities. I understand I can withdraw this consent at any time. *
+                  {t.privacyConsent} *
                 </Label>
               </div>
 
@@ -236,7 +237,7 @@ Merci de contacter ce prospect rapidement !`
                 className="w-full text-lg py-6 h-auto font-bold btn-pulse-glow btn-wave btn-bounce-hover" 
                 disabled={isSubmitting}
               >
-                {isSubmitting ? "Submitting..." : "Get Started Now"}
+                {isSubmitting ? t.submitting : t.getStartedNow}
               </Button>
             </form>
           </CardContent>

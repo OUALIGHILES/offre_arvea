@@ -2,8 +2,11 @@
 
 import { Button } from "@/components/ui/button"
 import { ArveaLogo } from "@/components/arvea-logo"
+import { useTranslation } from "@/lib/translation-context"
 
 export function ArveaHero() {
+  const { t } = useTranslation()
+  
   const scrollToForm = () => {
     document.getElementById("lead-form")?.scrollIntoView({ behavior: "smooth" })
   }
@@ -18,11 +21,10 @@ export function ArveaHero() {
         
         <div className="mb-8">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-800 mb-6 text-balance">
-            Unlock Your Online Earning Potential with <span className="text-gray-900 font-black">ARVEA</span>
+            {t.heroTitle}
           </h1>
           <p className="text-xl sm:text-2xl text-muted-foreground mb-8 text-pretty max-w-3xl mx-auto">
-            Discover proven strategies to generate income online. Join thousands who have transformed their financial
-            future through digital opportunities.
+            {t.heroSubtitle}
           </p>
         </div>
 
@@ -33,7 +35,7 @@ export function ArveaHero() {
             className="text-lg font-bold px-8 py-6 h-auto min-w-[200px] btn-pulse-glow btn-wave btn-bounce-hover"
             onClick={scrollToForm}
           >
-            Start Your Journey Today
+            {t.startJourney}
           </Button>
           <Button
             variant="outline"
@@ -41,22 +43,22 @@ export function ArveaHero() {
             className="text-lg font-bold px-8 py-6 h-auto min-w-[200px] border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white btn-glow-effect btn-rotate-hover"
             onClick={() => document.getElementById("earning-methods")?.scrollIntoView({ behavior: "smooth" })}
           >
-            Learn More
+            {t.learnMore}
           </Button>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
           <div className="space-y-2">
             <div className="text-3xl font-bold text-gray-800">5000+</div>
-            <div className="text-gray-600">Active Members</div>
+            <div className="text-gray-600">{t.activeMembers}</div>
           </div>
           <div className="space-y-2">
             <div className="text-3xl font-bold text-gray-800">$2M+</div>
-            <div className="text-gray-600">Total Earnings</div>
+            <div className="text-gray-600">{t.totalEarnings}</div>
           </div>
           <div className="space-y-2">
             <div className="text-3xl font-bold text-gray-800">95%</div>
-            <div className="text-gray-600">Success Rate</div>
+            <div className="text-gray-600">{t.successRate}</div>
           </div>
         </div>
       </div>

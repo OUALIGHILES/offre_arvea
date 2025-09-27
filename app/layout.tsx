@@ -5,6 +5,7 @@ import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
 import { Toaster } from "@/components/ui/toaster"
 import { ArveaHeader } from "@/components/arvea-header"
+import { TranslationProvider } from "@/lib/translation-context"
 import { Suspense } from "react"
 import "./globals.css"
 
@@ -28,12 +29,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
-        <Suspense fallback={null}>
-          <ArveaHeader />
-          {children}
-          <Toaster />
-          <Analytics />
-        </Suspense>
+        <TranslationProvider>
+          <Suspense fallback={null}>
+            <ArveaHeader />
+            {children}
+            <Toaster />
+            <Analytics />
+          </Suspense>
+        </TranslationProvider>
       </body>
     </html>
   )

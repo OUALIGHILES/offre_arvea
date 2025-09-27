@@ -1,28 +1,34 @@
+"use client"
+
+import { useTranslation } from "@/lib/translation-context"
+
 export function SuccessStrategies() {
+  const { t } = useTranslation()
+  
   const strategies = [
     {
-      title: "Start Small, Think Big",
-      description: "Begin with manageable projects to build confidence and experience before scaling up.",
+      title: t.startSmallThinkBig,
+      description: t.startSmallDescription,
     },
     {
-      title: "Focus on Value Creation",
-      description: "Always prioritize delivering genuine value to your clients or customers for long-term success.",
+      title: t.focusOnValue,
+      description: t.focusOnValueDescription,
     },
     {
-      title: "Build Your Personal Brand",
-      description: "Establish credibility and trust through consistent quality work and professional communication.",
+      title: t.buildPersonalBrand,
+      description: t.buildPersonalBrandDescription,
     },
     {
-      title: "Diversify Your Income Streams",
-      description: "Don't rely on a single source - combine multiple methods for stable, growing income.",
+      title: t.diversifyIncome,
+      description: t.diversifyIncomeDescription,
     },
     {
-      title: "Invest in Continuous Learning",
-      description: "Stay updated with industry trends and continuously improve your skills and knowledge.",
+      title: t.investInLearning,
+      description: t.investInLearningDescription,
     },
     {
-      title: "Network and Collaborate",
-      description: "Build relationships with other professionals and potential clients in your field.",
+      title: t.networkCollaborate,
+      description: t.networkCollaborateDescription,
     },
   ]
 
@@ -31,10 +37,10 @@ export function SuccessStrategies() {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 text-balance">
-            Strategies to Succeed Online
+            {t.successStrategiesTitle}
           </h2>
           <p className="text-xl text-muted-foreground text-pretty">
-            Follow these proven strategies that our most successful members use to maximize their online earnings.
+            {t.successStrategiesSubtitle}
           </p>
         </div>
 
