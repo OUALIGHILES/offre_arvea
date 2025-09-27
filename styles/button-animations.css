@@ -1,0 +1,172 @@
+/* Animations personnalisées pour les boutons */
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(31, 41, 55, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(31, 41, 55, 0.6), 0 0 40px rgba(55, 65, 81, 0.3);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes wiggle {
+  0%, 7% {
+    transform: rotateZ(0);
+  }
+  15% {
+    transform: rotateZ(-15deg);
+  }
+  20% {
+    transform: rotateZ(10deg);
+  }
+  25% {
+    transform: rotateZ(-10deg);
+  }
+  30% {
+    transform: rotateZ(6deg);
+  }
+  35% {
+    transform: rotateZ(-4deg);
+  }
+  40%, 100% {
+    transform: rotateZ(0);
+  }
+}
+
+/* Classes d'animation pour les boutons */
+.btn-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.btn-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.btn-bounce-in {
+  animation: bounce-in 0.6s ease-out;
+}
+
+.btn-wiggle:hover {
+  animation: wiggle 1s ease-in-out;
+}
+
+/* Effet de vague sur les boutons */
+.btn-wave {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-wave::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-wave:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Effet de brillance */
+.btn-glow-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-glow-effect::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.btn-glow-effect:hover::after {
+  left: 100%;
+}
+
+/* Effet de rebond au survol */
+.btn-bounce-hover:hover {
+  animation: bounce-in 0.3s ease-out;
+}
+
+/* Effet de rotation subtile */
+.btn-rotate-hover:hover {
+  transform: rotate(2deg) scale(1.05);
+}
+
+/* Effet de flottement */
+.btn-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Effet de pulsation douce */
+.btn-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+@keyframes pulse-soft {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}

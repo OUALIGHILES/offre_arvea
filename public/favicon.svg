@@ -1,0 +1,23 @@
+<svg viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="40" height="20" fill="#F5F5DC" />
+  <g fill="#1F2937">
+    {/* Letter A with inverted V crossbar */}
+    <path d="M2 15 L3.5 10 L4.5 10 L6 15 L5 15 L4.5 13 L3 13 L2.5 15 Z M3.5 11 L4 11 L3.8 12 L3.2 12 Z" />
+    
+    {/* Letter R */}
+    <path d="M7 5 L7 15 L8.5 15 L8.5 10.5 L10 15 L11.5 15 L10 10.5 L10 5 Z M8.5 8 L8.5 9.5 L10 9.5 L10 8 Z" />
+    
+    {/* Letter V */}
+    <path d="M13 5 L14 5 L15.5 10 L17 5 L18 5 L16 15 L15 15 Z" />
+    
+    {/* Letter E */}
+    <path d="M19 5 L19 15 L20.5 15 L20.5 10 L20 10 L20 8.5 L20.5 8.5 L20.5 6.5 L20 6.5 L20 5 Z" />
+    
+    {/* Letter A with inverted V crossbar */}
+    <path d="M22 15 L23.5 10 L24.5 10 L26 15 L25 15 L24.5 13 L23 13 L22.5 15 Z M23.5 11 L24 11 L23.8 12 L23.2 12 Z" />
+    
+    {/* Registered trademark symbol */}
+    <circle cx="32" cy="6" r="2" fill="none" stroke="#1F2937" stroke-width="0.5" />
+    <text x="32" y="7.5" text-anchor="middle" font-size="2" fill="#1F2937" font-family="serif">®</text>
+  </g>
+</svg>
