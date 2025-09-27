@@ -52,7 +52,7 @@ function validateLeadData(data: any) {
   }
 
   // Validate phone number format (basic validation)
-  if (data.phone && !/^[+]?[1-9][\d]{0,15}$/.test(data.phone.replace(/[\s\-$$$$]/g, ""))) {
+  if (data.phone && !/^[+]?[0-9][\d\s\-()]{7,20}$/.test(data.phone)) {
     errors.push("Invalid phone number format")
   }
 
@@ -82,6 +82,8 @@ export async function POST(request: NextRequest) {
     // Validate input data
     const validationErrors = validateLeadData(body)
     if (validationErrors.length > 0) {
+      console.log("Validation errors:", validationErrors)
+      console.log("Received data:", body)
       return NextResponse.json({ message: "Validation failed", errors: validationErrors }, { status: 400 })
     }
 

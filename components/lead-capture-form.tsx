@@ -39,9 +39,20 @@ export function LeadCaptureForm() {
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
-  const openWhatsApp = (firstName: string, phone: string) => {
+  const openWhatsApp = (formData: FormData) => {
     const message = encodeURIComponent(
-      `Hi! I'm ${firstName} and I just submitted my information on the Arvea job offers page. My phone number is ${phone}. I'm interested in learning more about online earning opportunities.`,
+      `🟢 NOUVEAU LEAD ARVEA 🟢
+
+👤 Nom: ${formData.firstName} ${formData.lastName}
+📍 Localisation: ${formData.location}
+📞 Téléphone: ${formData.phone}
+💻 Expérience en ligne: ${formData.workedOnline === "yes" ? "Oui" : "Non"}
+📝 Notes: ${formData.notes || "Aucune note"}
+
+✅ Formulaire soumis avec succès sur le site Arvea
+🕐 Date: ${new Date().toLocaleString('fr-FR')}
+
+Merci de contacter ce prospect rapidement !`
     )
     const whatsappUrl = `https://wa.me/213660839370?text=${message}`
     window.open(whatsappUrl, "_blank")
@@ -101,7 +112,7 @@ export function LeadCaptureForm() {
 
       // Open WhatsApp after a short delay
       setTimeout(() => {
-        openWhatsApp(formData.firstName, formData.phone)
+        openWhatsApp(formData)
       }, 1000)
     } catch (error) {
       console.error("Form submission error:", error)

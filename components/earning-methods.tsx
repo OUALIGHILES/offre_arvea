@@ -7,21 +7,18 @@ export function EarningMethods() {
       title: "Freelance Services",
       description: "Offer your skills in writing, design, programming, or consulting to clients worldwide.",
       features: ["Flexible Schedule", "Global Clients", "Skill Development"],
-      earning: "$500-$5000/month",
       difficulty: "Beginner",
     },
     {
       title: "Digital Products",
       description: "Create and sell online courses, ebooks, templates, or digital tools to passive income.",
       features: ["Passive Income", "Scalable Business", "Creative Freedom"],
-      earning: "$1000-$10000/month",
       difficulty: "Intermediate",
     },
     {
       title: "Affiliate Marketing",
       description: "Promote products and services you believe in and earn commissions on every sale.",
       features: ["No Inventory", "Performance Based", "Multiple Streams"],
-      earning: "$200-$20000/month",
       difficulty: "Advanced",
     },
   ]
@@ -56,9 +53,8 @@ export function EarningMethods() {
           {methods.map((method, index) => (
             <Card key={index} className="relative h-full hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-4">
-                <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center justify-start mb-2">
                   <Badge className={getDifficultyColor(method.difficulty)}>{method.difficulty}</Badge>
-                  <span className="text-sm font-semibold text-primary">{method.earning}</span>
                 </div>
                 <CardTitle className="text-xl text-balance">{method.title}</CardTitle>
                 <CardDescription className="text-pretty">{method.description}</CardDescription>

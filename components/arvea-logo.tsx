@@ -11,17 +11,17 @@ interface ArveaLogoProps {
 }
 
 const sizeClasses = {
-  sm: "h-8 w-8",
-  md: "h-12 w-12", 
-  lg: "h-16 w-16",
-  xl: "h-20 w-20"
+  sm: "h-6 w-6",
+  md: "h-8 w-8", 
+  lg: "h-10 w-10",
+  xl: "h-12 w-12"
 }
 
 const textSizeClasses = {
-  sm: "text-lg",
-  md: "text-xl",
-  lg: "text-2xl", 
-  xl: "text-3xl"
+  sm: "text-sm",
+  md: "text-base",
+  lg: "text-lg", 
+  xl: "text-xl"
 }
 
 export function ArveaLogo({ 
@@ -66,7 +66,12 @@ export function ArveaLogo({
   }
 
   return (
-    <div className="flex items-center space-x-3">
+    <div className={cn(
+      "flex items-center space-x-2 px-3 py-1.5 rounded-md border-2 shadow-md",
+      "bg-gradient-to-r from-amber-50 to-amber-100 border-gray-300",
+      "hover:from-amber-100 hover:to-amber-200 hover:border-gray-400 hover:shadow-lg",
+      "transition-all duration-300 ease-out hover:scale-105 active:scale-95"
+    )}>
       {logoSvg}
       <span 
         className={cn(
